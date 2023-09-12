@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		572F4BEE2AB0C2AF00EB41FC /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572F4BED2AB0C2AF00EB41FC /* Observable.swift */; };
+		572F4BF02AB0C3A000EB41FC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572F4BEF2AB0C3A000EB41FC /* ViewModel.swift */; };
 		574C15482A667CCA00AFB459 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574C15472A667CCA00AFB459 /* AppDelegate.swift */; };
 		574C154A2A667CCA00AFB459 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574C15492A667CCA00AFB459 /* SceneDelegate.swift */; };
 		574C154C2A667CCA00AFB459 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574C154B2A667CCA00AFB459 /* ViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		572F4BED2AB0C2AF00EB41FC /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		572F4BEF2AB0C3A000EB41FC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		574C15442A667CCA00AFB459 /* JACKFLIX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JACKFLIX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		574C15472A667CCA00AFB459 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		574C15492A667CCA00AFB459 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +45,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		572F4BEB2AB0C24C00EB41FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57CC95882A97540F00E88154 /* TextFieldStackView.swift */,
+				57CC958A2A9756C000E88154 /* GrayWhiteTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		572F4BEC2AB0C25300EB41FC /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				574C154B2A667CCA00AFB459 /* ViewController.swift */,
+				572F4BEF2AB0C3A000EB41FC /* ViewModel.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		574C153B2A667CCA00AFB459 = {
 			isa = PBXGroup;
 			children = (
@@ -60,11 +82,11 @@
 		574C15462A667CCA00AFB459 /* JACKFLIX */ = {
 			isa = PBXGroup;
 			children = (
+				572F4BEB2AB0C24C00EB41FC /* View */,
+				572F4BEC2AB0C25300EB41FC /* Scene */,
+				572F4BED2AB0C2AF00EB41FC /* Observable.swift */,
 				574C15472A667CCA00AFB459 /* AppDelegate.swift */,
 				574C15492A667CCA00AFB459 /* SceneDelegate.swift */,
-				574C154B2A667CCA00AFB459 /* ViewController.swift */,
-				57CC95882A97540F00E88154 /* TextFieldStackView.swift */,
-				57CC958A2A9756C000E88154 /* GrayWhiteTextField.swift */,
 				574C15502A667CCC00AFB459 /* Assets.xcassets */,
 				574C15522A667CCC00AFB459 /* LaunchScreen.storyboard */,
 				574C15552A667CCC00AFB459 /* Info.plist */,
@@ -152,7 +174,9 @@
 				574C154C2A667CCA00AFB459 /* ViewController.swift in Sources */,
 				57CC95892A97540F00E88154 /* TextFieldStackView.swift in Sources */,
 				574C15482A667CCA00AFB459 /* AppDelegate.swift in Sources */,
+				572F4BEE2AB0C2AF00EB41FC /* Observable.swift in Sources */,
 				574C154A2A667CCA00AFB459 /* SceneDelegate.swift in Sources */,
+				572F4BF02AB0C3A000EB41FC /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

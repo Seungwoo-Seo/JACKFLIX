@@ -47,11 +47,38 @@ final class ViewController: UIViewController {
         return moreInfoSwitch
     }()
 
+    // MARK: - ViewModel
+    let viewModel = ViewModel()
+    var flag = true
+
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureAttributes()
         configureHierarchy()
+
+        viewModel.emailPhoneNumber.bind { text in
+            self.textFieldStackView.emailPhoneNumberTextField.text = text
+        }
+        viewModel.password.bind { text in
+            self.textFieldStackView.passwordTextField.text = text
+        }
+        viewModel.nickname.bind { text in
+            self.textFieldStackView.nickNameTextField.text = text
+        }
+        viewModel.location.bind { text in
+            self.textFieldStackView.locationTextField.text = text
+        }
+        viewModel.suggestionCode.bind { text in
+            self.textFieldStackView.suggestionCodeTextField.text = text
+        }
+        viewModel.isValid.bind { bool in
+            self.textFieldStackView.signUpButton.isEnabled = bool
+            self.textFieldStackView.signUpButton.setTitleColor(bool ? .black : .gray, for: .normal)
+            self.textFieldStackView.signUpButton.backgroundColor = bool ? .white : .lightGray
+        }
+        viewModel.isValid.value = false
     }
 
     override func touchesBegan(
@@ -63,6 +90,30 @@ final class ViewController: UIViewController {
         view.endEditing(true)
     }
 
+    @objc
+    func editChangedEmailPhoneNumberTextField(_ sender: UITextField) {
+        viewModel.emailPhoneNumber.value = sender.text ?? ""
+        viewModel.checkValidation()
+    }
+    @objc
+    func editChangedPasswordTextField(_ sender: UITextField) {
+        viewModel.password.value = sender.text ?? ""
+        viewModel.checkValidation()
+    }
+    @objc
+    func editChangedNicknameTextField(_ sender: UITextField) {
+        viewModel.nickname.value = sender.text ?? ""
+        viewModel.checkValidation()
+    }
+    @objc
+    func editChangedLocationTextField(_ sender: UITextField) {
+        viewModel.location.value = sender.text ?? ""
+    }
+    @objc
+    func editChangedSuggestionCodeTextField(_ sender: UITextField) {
+        viewModel.suggestionCode.value = sender.text ?? ""
+    }
+
 }
 
 // MARK: - UI
@@ -71,6 +122,32 @@ private extension ViewController {
     func configureAttributes() {
         // view
         view.backgroundColor = .black
+
+        textFieldStackView.emailPhoneNumberTextField.addTarget(
+            self,
+            action: #selector(editChangedEmailPhoneNumberTextField),
+            for: .editingChanged
+        )
+        textFieldStackView.passwordTextField.addTarget(
+            self,
+            action: #selector(editChangedPasswordTextField),
+            for: .editingChanged
+        )
+        textFieldStackView.nickNameTextField.addTarget(
+            self,
+            action: #selector(editChangedNicknameTextField),
+            for: .editingChanged
+        )
+        textFieldStackView.locationTextField.addTarget(
+            self,
+            action: #selector(editChangedLocationTextField),
+            for: .editingChanged
+        )
+        textFieldStackView.suggestionCodeTextField.addTarget(
+            self,
+            action: #selector(editChangedSuggestionCodeTextField),
+            for: .editingChanged
+        )
 
         // signUpButton
         textFieldStackView.signUpButton.addTarget(
@@ -117,42 +194,7 @@ private extension ViewController {
 
     @objc
     func didTapSignUpButton(_ sender: UIButton) {
-        // 이메일 주소 또는 전화번호, 비밀번호, 닉네임
-        // 있는지 검사
-        guard textFieldStackView.emailPhoneNumberTextField.text?.isEmpty == false
-                && textFieldStackView.passwordTextField.text?.isEmpty == false
-                && textFieldStackView.nickNameTextField.text?.isEmpty == false
-        else {
-            presentAlert(
-                title: "이메일 주소 전화번호, 비밀번호, 닉네임은 필수",
-                message: nil,
-                isError: true
-            )
-            return
-        }
-
-        // 비밀번호 자리수 검사
-        guard textFieldStackView.passwordTextField.text!.count >= 6
-        else {
-            presentAlert(
-                title: "비밀번호는 6자리 이상",
-                message: nil,
-                isError: true
-            )
-            return
-        }
-
-        guard let emailPhonNumber = textFieldStackView.emailPhoneNumberTextField.text,
-              let location = textFieldStackView.locationTextField.text,
-              let suggestionCode = textFieldStackView.suggestionCodeTextField.text
-        else {return}
-
-        // 모든 검사 통과 시 가입 정보 띄우기
-        let message = """
-ID : \(emailPhonNumber)
-위치 : \(location.isEmpty ? "X" : location)
-추천코드 : \(suggestionCode.isEmpty ? "X" : suggestionCode)
-"""
+        let message = viewModel.message
         presentAlert(
             title: textFieldStackView.nickNameTextField.text,
             message: message,
